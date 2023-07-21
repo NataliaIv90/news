@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, CSSProperties } from 'react';
 import facebook from '../../images/icons/facebook.svg';
 import tiktok from '../../images/icons/tiktok.svg';
 import twitter from '../../images/icons/twitter.svg';
@@ -7,9 +7,20 @@ import { Navigation } from '../navigation/Navigation';
 import { footerSectionData } from '../../data/pageData';
 import logo from '../../images/icons/logo.svg';
 import { Image } from '../Img/Image';
-import { INavigationLinkData } from '../navigation/NavigationLink';
 
 
+const footerNavigationWrapperStyle: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  gap: '3%',
+  textAlign: 'center'
+}
+
+const flexRight: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'flex-end',
+  gap: '3%'
+}
 
 export const Footer: FC = () => {
   const footerNavigationSectionKeys = Object.keys(footerSectionData.navigation);
@@ -30,35 +41,38 @@ export const Footer: FC = () => {
   }]
 
   return (
-    <div className='Footer'>
-      <div className='Footer__navigation'>
+    <div className='Footer' style={{ padding: "20px 50px" }}>
+      <div style={footerNavigationWrapperStyle} className='Footer__navigation'>
         {footerNavigationSectionKeys.map((el, index) => (
           <div>
             <h3>{el.toUpperCase()}</h3>
             <Navigation
               key={index}
               data={footerSectionData.navigation[el as keyof typeof footerSectionData.navigation]}
+              style={{ padding: '0', display: 'flex', flexDirection: 'column', gap: '10px' }}
             />
           </div>
         ))}
       </div>
-      <div className='Footer__footer'>
+      <div className='Footer__footer' style={footerNavigationWrapperStyle}>
         <div>
           <div>
-            <Image imgPath={logo} />
+            <a href='/'>
+              <Image imgPath={logo} />
+            </a>
           </div>
           <div>
             <p>© {new Date().getFullYear()} Hypnosis Corporation Inc. All rights reserved.</p>
           </div>
         </div>
-        <div>
-          <div className='Footer__socialMediaIcons'>
+        <div >
+          <div className='Footer__socialMediaIcons' style={flexRight}>
             {socialMediaData.map((el) => {
-              return (<Image imgPath={el.linkText} />)
+              return (<a href={el.linkSrc} target="_blank" rel="noreferrer noopener"><Image imgPath={el.linkText} /></a>)
             })}
           </div>
           <div>
-            <Navigation data={footeFooterNavigationLinks} />
+            <Navigation data={footeFooterNavigationLinks} style={{ display: 'flex', justifyContent: 'center', alighItems: 'center', gap: '30px' }} />
           </div>
         </div>
       </div>

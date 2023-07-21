@@ -9,13 +9,18 @@ import logo from '../../images/icons/logo.svg'
 interface IHeaderData {
   navigationData: INavigationLinkData[];
   searchInputData: ISearchInput;
+  style?: {}
 }
 
 export const Header: FC<IHeaderData> = ({ navigationData, searchInputData }) => {
   return (
-    <div className='Header'>
-      <Image imgPath={logo} />
-      <Navigation data={navigationData} />
+    <div className='Header' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 50px' }}>
+      <div>
+        <a href='/'>
+          <Image imgPath={logo} />
+        </a>
+      </div>
+      <Navigation data={navigationData} style={{ display: 'flex', justifyContent: 'center', alighItems: 'center', gap: '30px' }} />
       <Search searchInputData={searchInputData} />
     </div>
   )

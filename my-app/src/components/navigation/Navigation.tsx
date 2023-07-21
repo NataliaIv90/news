@@ -4,11 +4,12 @@ import { INavigationLinkData } from './NavigationLink';
 
 interface INavigationProps {
   data: INavigationLinkData[];
+  style?:{}
 }
 
-export const Navigation: FC<INavigationProps> = ({ data }) => {
+export const Navigation: FC<INavigationProps> = ({ data,  style }) => {
   return (
-    <ul className='Navigation'>
+    <ul className='Navigation' style={style} >
       {data.map((linkItemData, index) => (
         <NavigationLink key={index} data={linkItemData} />
       ))}

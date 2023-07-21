@@ -1,4 +1,4 @@
-import React,{ FC} from 'react';
+import React,{useState, FC} from 'react';
 
 export interface ISearchInput{
   placeholder: string;
@@ -6,9 +6,17 @@ export interface ISearchInput{
 }
 
 export const SearchInput:FC<ISearchInput> = ({placeholder, value})=> {
+  const [inputValue, setValue] = useState<string>(value)
   return(
       <div className='SearchInput'>
-        <input type="text" name="searchInput" id="searchInput" placeholder={placeholder} value={value}/>
+        <input 
+        onChange={(e)=>{
+          setValue(e.target.value)}} 
+          type="text" 
+          name="searchInput"  
+          placeholder={placeholder} 
+          value={inputValue} 
+          style={{border:'none', outline:'none', padding:'5px'}}/>
       </div>
   )
 }
